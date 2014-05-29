@@ -1,0 +1,133 @@
+<!--
+You are free to copy and use this sample in accordance with the terms of the
+Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+	<style type="text/css">
+		.resultText
+		{
+			color: black;
+			font-family: 'Open Sans', sans-serif;
+			font-variant: small-caps;
+			font-size: 5em;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			position:fixed;
+			top:28%;
+			left:40%;
+		}
+	</style>
+	<style type="text/css">
+	img{
+		 border: solid 2px black;
+		-webkit-box-shadow: 17px 22px 29px 0px rgba(0,0,0,0.59);
+		-moz-box-shadow: 17px 22px 29px 0px rgba(0,0,0,0.59);
+		 box-shadow: 17px 22px 29px 0px rgba(0,0,0,0.59);
+		 
+		 border-radius: 10px 10px 10px 10px;
+		-moz-border-radius: 10px 10px 10px 10px;
+		-webkit-border-radius: 10px 10px 10px 10px;
+		 border: 0px solid #000000;
+		 z-index: -1;
+		}
+	</style>	
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'></link>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>result</title>
+    <script src="//www.google.com/jsapi?key=AIzaSyA5m1Nc8ws2BbmPRwKu5gFradvD_hgq6G0" type="text/javascript"></script>
+    <script type="text/javascript">
+    /*
+    *  How to search for images and restrict them by size.
+    *  This demo will also show how to use Raw Searchers, aka a searcher that is
+    *  not attached to a SearchControl.  Thus, we will handle and draw the results
+    *  manually.
+    */
+    
+    google.load('search', '1');
+    
+    function searchComplete(searcher) {
+      // Check that we got results
+      if (searcher.results && searcher.results.length > 0) {
+        // Grab our content div, clear it.
+        var contentDiv = document.getElementById('content');
+        contentDiv.innerHTML = '';
+    
+        // Loop through our results, printing them to the page.
+        var results = searcher.results;
+        for (var i = 0; i < results.length; i++) {
+          // For each result write it's title and image to the screen
+          var result = results[i];
+          var imgContainer = document.createElement('div');
+    
+          var title = document.createElement('h2');
+          // We use titleNoFormatting so that no HTML tags are left in the title
+          title.innerHTML = result.titleNoFormatting;
+    
+          var newImg = document.createElement('img');
+		  newImg.setAttribute("width",350);
+		  newImg.setAttribute("height",250);
+		  newImg.style.position="absolute";
+		  switch(i)
+		  {
+			case 0:
+			newImg.style.left="300px";
+			newImg.style.top="50px";
+			break;
+			case 1:
+			newImg.style.left="750px";
+			newImg.style.top="50px";
+			break;
+			case 2:
+			newImg.style.left="300px";
+			newImg.style.top="350px";
+			break;
+			case 3:
+			newImg.style.left="750px";
+			newImg.style.top="350px";
+			break;
+		  }
+          // There is also a result.url property which has the escaped version
+          newImg.src = result.tbUrl;
+    
+          //imgContainer.appendChild(title);
+          imgContainer.appendChild(newImg);
+    
+          // Put our title + image in the content
+          contentDiv.appendChild(imgContainer);
+        }
+      }
+    }
+    
+    //function OnLoad() 
+	function bringImg()
+	{
+      // Our ImageSearch instance.
+      var imageSearch = new google.search.ImageSearch();
+    
+      // Restrict to extra large images only
+      imageSearch.setRestriction(google.search.ImageSearch.RESTRICT_IMAGESIZE,
+                                 google.search.ImageSearch.IMAGESIZE_MEDIUM);
+    
+      // Here we set a callback so that anytime a search is executed, it will call
+      // the searchComplete function and pass it our ImageSearch searcher.
+      // When a search completes, our ImageSearch object is automatically
+      // populated with the results.
+      imageSearch.setSearchCompleteCallback(this, searchComplete, [imageSearch]);
+    
+      // Find me a beautiful car.
+      var thinkResult=document.getElementById("thinkResult").innerHTML;
+	  imageSearch.execute(thinkResult);
+    }
+    //google.setOnLoadCallback(OnLoad);
+    </script>
+  </head>
+  <body style="font-family: Arial;border: 1px;" onload="bringImg()">
+    <div id="content">Loading...</div>
+	<p class="resultText" id="thinkResult">{{item}}</p>
+  </body>
+</html>
+​

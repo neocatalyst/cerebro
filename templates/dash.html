@@ -1,0 +1,427 @@
+<html>
+	<head>		
+		<title>DASH</title>
+
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:800' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+		
+			.textbox_big
+			{
+				border-top-left-radius: 6px;
+				border-top-right-radius: 6px;
+				border-bottom-right-radius: 6px;
+				border-bottom-left-radius: 6px;	
+				border-width: 1px;				
+				text-decoration: none;	
+				color:#181818;
+				font-size:25px;
+				font-weight:bold;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-weight: 500;			
+			}
+
+
+		</style>
+		
+		<script>
+			function openDialog() {
+				Avgrund.show( "#default-popup" );
+			}
+			function closeDialog() {
+				Avgrund.hide();
+			}
+		</script>
+		<!--__________________________css for the popup________________________________-->
+		<!--___________________________________________________________________________-->
+		<style type="text/css">
+.avgrund-active body {
+	-webkit-transform: scale( 0.9 );
+	   -moz-transform: scale( 0.9 );
+	    -ms-transform: scale( 0.9 );
+	     -o-transform: scale( 0.9 );
+	        transform: scale( 0.9 );
+}
+
+.avgrund-cover {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	visibility: hidden;
+	opacity: 0;
+	background: rgba( 0, 0, 0, 0.5 );
+}
+	.avgrund-active .avgrund-cover {
+		visibility: visible;
+		opacity: 1;
+	}
+
+.avgrund-contents {
+	position: relative;
+	padding: 20px;
+	max-width: 400px;
+	height: 100%;
+	margin: auto;
+}
+	.avgrund-active .avgrund-contents {
+		-webkit-filter: blur(2px);
+		   -moz-filter: blur(2px);
+		    -ms-filter: blur(2px);
+		     -o-filter: blur(2px);
+		        filter: blur(2px);
+	}
+	.no-blur.avgrund-active .avgrund-contents {
+		-webkit-filter: none;
+		   -moz-filter: none;
+		    -ms-filter: none;
+		     -o-filter: none;
+		        filter: none;
+	}
+
+.avgrund-popup {
+	position: absolute;
+	width: 440px;
+	height: 280px;
+	left: 50%;
+	top: 50%;
+	margin: -130px 0 0 -190px;
+	visibility: hidden;
+	opacity: 0;
+	z-index: 2;
+	padding: 20px;
+
+	background: white;
+	box-shadow: 0px 0px 20px rgba( 0, 0, 0, 0.6 );
+	border-radius: 3px;
+
+	-webkit-transform: scale( 0.8 );
+	   -moz-transform: scale( 0.8 );
+	    -ms-transform: scale( 0.8 );
+	     -o-transform: scale( 0.8 );
+	        transform: scale( 0.8 );
+}
+	.avgrund-active .avgrund-popup-animate {
+		visibility: visible;
+		opacity: 1;
+
+		-webkit-transform: scale( 1.1 );
+		   -moz-transform: scale( 1.1 );
+		    -ms-transform: scale( 1.1 );
+		     -o-transform: scale( 1.1 );
+		        transform: scale( 1.1 );
+	}
+	.avgrund-popup.stack {
+		-webkit-transform: scale( 1.5 );
+		   -moz-transform: scale( 1.5 );
+		    -ms-transform: scale( 1.5 );
+		     -o-transform: scale( 1.5 );
+		        transform: scale( 1.5 );
+	}
+	.avgrund-active .avgrund-popup.stack {
+		-webkit-transform: scale( 1.1 );
+		   -moz-transform: scale( 1.1 );
+		    -ms-transform: scale( 1.1 );
+		     -o-transform: scale( 1.1 );
+		        transform: scale( 1.1 );
+	}
+
+
+.avgrund-ready body,
+.avgrund-ready .avgrund-contents,
+.avgrund-ready .avgrund-popup,
+.avgrund-ready .avgrund-cover {
+	-webkit-transform-origin: 50% 50%;
+	   -moz-transform-origin: 50% 50%;
+	    -ms-transform-origin: 50% 50%;
+	     -o-transform-origin: 50% 50%;
+	        transform-origin: 50% 50%;
+
+	-webkit-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	   -moz-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	    -ms-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	     -o-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+	        transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+.avgrund-ready .avgrund-popup.no-transition {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	    -ms-transition: none;
+	     -o-transition: none;
+	        transition: none;
+}
+
+
+		</style>
+		<style type="text/css">
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, 
+body {
+	height: 100%;
+	overflow: hidden;
+}
+
+
+small {
+	display: block;
+	margin-top: 15px;
+	padding-top: 15px;
+	color: #333;
+	font-size: 0.85em;
+	border-top: 1px dashed #ccc;
+
+	-webkit-text-size-adjust: none;
+}
+
+
+.sharing {
+	margin-top: 50px;
+}
+
+#d1{
+background-image: url('http://jaydev.org/img/hed.jpg');
+	background-repeat: no-repeat;
+background-position: center;
+background-size:cover; 
+height: 400px;
+}
+
+.sb{
+		font-size: 0.8em;
+	font-variant: small-caps;
+height: 35px;
+background: #2ecc71;
+color:white;
+border: 0px none;
+height: 10%;
+width:150px;
+margin: 15px;
+}
+
+.add,#add{
+	background: #e74c3c;
+}
+
+
+
+.sb:hover{
+	cursor: pointer;
+	background: #2ecc51;
+}
+
+.add:hover,.aa:hover,#add:hover{
+	background: #c0392b;
+}
+
+h1{
+	color: white;
+	font-family: 'Open Sans', sans-serif;
+	font-variant: small-caps;
+	font-size: 3em;
+text-align: center;
+
+}
+
+h2{
+
+	font-family: 'Open Sans', sans-serif;
+	font-variant: small-caps;
+text-align: center;
+}
+
+td{
+		font-family: 'Open Sans', sans-serif;
+	font-variant: small-caps;
+}
+
+.sb2{
+	width: 100px;
+	margin: 0;
+	margin-left: 10px;
+	background: #473C74;
+}
+
+div.thinkmenu{
+	width: 100%;
+}
+
+form{
+	display: inline;
+}
+
+		</style>		
+
+	</head>
+	<body>
+
+<div id="d1">
+	
+	<br><br>
+	<h1>Welcome {{name}}</h1>		<br><br>
+		<!--_____________________________________-->
+		<!--__ input __ objects ___ popup start _-->
+		<!--_____________________________________-->
+		<aside id="default-popup" class="avgrund-popup"><!--add object popup-->
+			<h2>Input object details here</h2>
+				<br><br>
+				<form action="/add" method="get">
+				<center>
+					<input style="width:50%;
+	height:10%; text-align:center;  "  type="text" name="obname" id="obid" placeholder=" Name of the object "/>
+	<br/><br/>		
+					<input type='text' name='uname' value={{name}} style="display:none;"/>
+					<input type="submit" class="sb" value="submit"/>
+				</form>
+					<button class="sb add" onclick="javascript:closeDialog();">Close</button></center>
+		</aside>		
+		<!--_________________________________________-->
+		<!--_______	input objects popup	end _________-->
+		<!--_________________________________________-->
+		<article class="avgrund-contents">
+	<div class="thinkmenu" align="center">
+		
+		<form action="/testmeans" method="GET">		
+		<input type='text' name='uname' value={{name}} style="display:none;"/>
+		<input type="submit" value="K Neighbours method" class="sb"/>
+		</form>
+				
+			
+		<form action="/testtrees" method="GET">
+		<input type='text' name='uname' value={{name}} style="display:none;"/>
+		<input type="submit" value="decision method " class="sb"/>
+		</form>
+		
+		
+		<form action="/testsvm" method="GET">				
+		<input type='text' name='uname' value={{name}} style="display:none;"/>
+		<input type="submit" value="svm method" class="sb"/>
+		</form>
+		
+	
+
+		</div>
+		<br/>
+		<center>
+		<button class="sb" id="add" onclick="openDialog()" class=""> add element </button>
+		</center>
+		<br/>		
+		
+	</div>
+		<br/>
+	<div class="elementstable" align="center" width="50%" style="table-layout: fixed; width: 50%; position:absolute; left:25%;">
+	<table id="objects" class="table table-hover table-striped" >
+	{% for x in items %}
+		<tr>
+			<td>{{x}} </td>
+			<td>			
+			<form action="/train" method="get">				
+				<input type="text" name="obname" value={{x}} style="display:none;"/>
+				<input type='text' name='uname' value={{name}} style="display:none;"/>
+				<input class="sb sb2" type="submit" value="train"/>
+			</form>
+			</td>			
+			<td>
+				<form action="/delete" method="get">
+				<input type="text" name="obname" value={{x}} style="display:none;"/>
+				<input type='text' name='uname' value={{name}} style="display:none;"/>
+				<input class="sb sb2 aa" type="submit" value="delete"/>
+			</form>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+	</div>
+		</article>
+		<div class="avgrund-cover"></div>		
+		<!--__________________________bottom script for the popup______________________-->		
+		<script type="text/javascript">			
+var Avgrund = (function(){
+
+	var container = document.documentElement,
+		popup = document.querySelector( '.avgrund-popup-animate' ),
+		cover = document.querySelector( '.avgrund-cover' ),
+		currentState = null;
+
+	container.className = container.className.replace( /\s+$/gi, '' ) + ' avgrund-ready';
+
+	// Deactivate on ESC
+	function onDocumentKeyUp( event ) {
+		if( event.keyCode === 27 ) {
+			deactivate();
+		}
+	}
+
+	// Deactivate on click outside
+	function onDocumentClick( event ) {
+		if( event.target === cover ) {
+			deactivate();
+		}
+	}
+
+	function activate( state ) {
+		document.addEventListener( 'keyup', onDocumentKeyUp, false );
+		document.addEventListener( 'click', onDocumentClick, false );
+		document.addEventListener( 'touchstart', onDocumentClick, false );
+
+		removeClass( popup, currentState );
+		addClass( popup, 'no-transition' );
+		addClass( popup, state );
+
+		setTimeout( function() {
+			removeClass( popup, 'no-transition' );
+			addClass( container, 'avgrund-active' );
+		}, 0 );
+
+		currentState = state;
+	}
+
+	function deactivate() {
+		document.removeEventListener( 'keyup', onDocumentKeyUp, false );
+		document.removeEventListener( 'click', onDocumentClick, false );
+		document.removeEventListener( 'touchstart', onDocumentClick, false );
+
+		removeClass( container, 'avgrund-active' );
+		removeClass( popup, 'avgrund-popup-animate')
+	}
+
+	function disableBlur() {
+		addClass( document.documentElement, 'no-blur' );
+	}
+
+	function addClass( element, name ) {
+		element.className = element.className.replace( /\s+$/gi, '' ) + ' ' + name;
+	}
+
+	function removeClass( element, name ) {
+		element.className = element.className.replace( name, '' );
+	}
+
+	function show(selector){
+		popup = document.querySelector( selector );
+		addClass(popup, 'avgrund-popup-animate');
+		activate();
+		return this;
+	}
+	function hide() {
+		deactivate();
+	}
+
+	return {
+		activate: activate,
+		deactivate: deactivate,
+		disableBlur: disableBlur,
+		show: show,
+		hide: hide
+	}
+
+})();
+		</script>
+
+	</body>
+</html>
